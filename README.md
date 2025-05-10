@@ -1,7 +1,6 @@
 <h1 align="center">milka</h1>
-<p align="center">
-    $\color{Lavender}{creative\ coding\ companion.}$
-</p>
+
+$\color{Lavender}{creative\ coding\ companion.}$
 
 <br>
 <h2>🐶 about</h2>
