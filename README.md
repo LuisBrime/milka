@@ -1,8 +1,9 @@
 <h1 align="center">milka</h1>
 <p align="center">
-    $\color{Lavender}{creative\ coding\ companion}$
+    $\color{Lavender}{creative\ coding\ companion.}$
 </p>
 
+<br>
 <h2>🐶 about</h2>
 
 `milka` is a custom server tool built using [deno](https://deno.com/) and
@@ -12,6 +13,7 @@ without having to manually create html files for each one. [^1]
 <sub><sup> currently only [p5js](https://p5js.org/) is supported for rendering
 sketches. </sup></sub>
 
+<br>
 <h2>☕️ features</h2>
 
 some features will be added as project progresses, marked ones are available:
@@ -23,6 +25,7 @@ some features will be added as project progresses, marked ones are available:
 - [ ] use `lib/` to add shared utilities for projects and make them available
       for each sketch.
 
+<br>
 <h2>⚙️ installing & running</h2>
 
 only [deno](https://deno.com/) is required to run the project:
