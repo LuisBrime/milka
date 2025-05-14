@@ -2,9 +2,9 @@ import { Application } from 'jsr:@oak/oak'
 import { Status } from 'jsr:@oak/commons/status'
 import { isHttpError } from 'jsr:@oak/commons/http_errors'
 
-import { chalk, logError, milkaLog } from './log.ts'
-import { projectRouter } from './routes.ts'
-import { closeAll } from './compiler.ts'
+import { milkaCompiler } from '@/compiler/index.ts'
+import { chalk, logError, milkaLog } from '@/log'
+import { projectRouter } from '@/routes'
 
 const SERVER_PORT = parseInt(Deno.env.get('PORT') ?? '8000')
 
@@ -51,9 +51,9 @@ app.use(async (ctx, next) => {
     } else {
       throw error
     }
+  } finally {
+    console.groupEnd()
   }
-
-  console.groupEnd()
 })
 
 app.use(projectRouter.routes())
@@ -73,7 +73,7 @@ const signalHandler = async (): Promise<void> => {
   milkaLog(chalk.underline('🤍 closing server, bye bye! 👋'))
   console.log('\n')
 
-  await closeAll()
+  await milkaCompiler.closeAll()
   closingController.abort()
   Deno.exit(0)
 }

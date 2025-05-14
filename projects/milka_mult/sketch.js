@@ -1,17 +1,16 @@
 let cnv
+let drawingController
 
 const setup = () => {
   createCanvas(800, 800, document.getElementById('mainCanvas'))
   cnv = createGraphics(800, 800)
+  drawingController = new Controller(800, 800)
+  drawingController.setup()
   noLoop()
 }
 
 const draw = () => {
-  cnv.push()
-  cnv.translate(400, 400)
-  cnv.fill('blue')
-  cnv.circle(0, 0, 250)
-  cnv.pop()
+  drawingController.draw(cnv)
   image(cnv, 0, 0)
 }
 

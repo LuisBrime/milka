@@ -1,13 +1,9 @@
 import { Router } from 'jsr:@oak/oak'
 import { Status } from 'jsr:@oak/commons/status'
-import * as path from 'jsr:@std/path'
-import { exists } from 'jsr:@std/fs/exists'
 
-import { buildAndWatch, getCompiler } from './compiler.ts'
-import { milkaLog } from './log.ts'
-import { addWSClient, reloadWSClient } from './ws.ts'
-
-const projectsDir = path.resolve(import.meta.dirname!, 'projects')
+import { milkaCompiler } from '@/compiler/index.ts'
+import { chalk, milkaLog } from '@/log'
+import { addWSClient, reloadWSClient } from '@/ws'
 
 export const projectRouter = new Router()
 projectRouter.get('/:projectName', async (ctx, next) => {
@@ -27,39 +23,42 @@ projectRouter.get('/:projectName', async (ctx, next) => {
     return next
   }
 
-  const projectCompiler = getCompiler(project)
-  if (projectCompiler) {
+  const existingPath = milkaCompiler.getOutputPath(project)
+  if (existingPath) {
     await ctx.send({
-      root: projectCompiler.outputPath,
+      root: existingPath,
       path: './',
       index: 'index.html',
     })
-    milkaLog(`– ⚙️  served and stored on ${projectCompiler.outputPath}`)
+    milkaLog(`– 🦴 retrieved and served ${project}`)
 
     return next
   }
 
-  milkaLog(`– 💡 fetching and rendering ${project}...`)
-  const projectSourcePath = path.join(projectsDir, `${project}.js`)
-  if (!(await exists(projectSourcePath))) {
+  milkaLog(`– 💡 fetching and rendering ${chalk.bold.yellow(project)}...`)
+  const configCreated = await milkaCompiler.setupProject(project)
+  if (!configCreated) {
     ctx.throw(Status.NotFound, 'Project not found', { project })
     return
   }
 
   const onBuildTrigger = () => reloadWSClient(project)
-  const { outputPath } = await buildAndWatch({
+  const { outputPath } = await milkaCompiler.compile({
     ctx,
     project,
-    projectPath: projectSourcePath,
     onWatch: onBuildTrigger,
   })
 
   await ctx.send({
-    root: outputPath,
+    root: outputPath!,
     path: './',
     index: 'index.html',
   })
-  milkaLog(`– ⚙️  served and stored on ${outputPath}`)
+  milkaLog(
+    `– ⚙️  served and stored on ${
+      chalk.italic.dim(outputPath!.replace(Deno.cwd(), ''))
+    }`,
+  )
 
   return next
 })
@@ -72,12 +71,16 @@ projectRouter.get('/:projectName/:path', async (ctx, next) => {
     return
   }
 
-  const { outputPath } = getCompiler(project)
+  const outputPath = milkaCompiler.getOutputPath(project)
   if (!outputPath) {
     ctx.throw(Status.NotFound, 'Project not found')
     return
   }
-  milkaLog(`– 🦴 retrieving asset ${ctx.params.path} for ${project}...`)
+  milkaLog(
+    `– 🦴 retrieving asset ${chalk.italic.yellow.dim(ctx.params.path)} for ${
+      chalk.bold.yellow(project)
+    }...`,
+  )
 
   await ctx.send({ root: outputPath, path: './', index: path })
   return next

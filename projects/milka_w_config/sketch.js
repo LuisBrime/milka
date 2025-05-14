@@ -9,8 +9,12 @@ const setup = () => {
 const draw = () => {
   cnv.push()
   cnv.translate(400, 400)
-  cnv.fill('blue')
-  cnv.circle(0, 0, 250)
+  cnv.fill('magenta')
+  cnv.circle(0, 0, 50)
+  cnv.fill('cyan')
+  cnv.circle(0, 50, 50)
+  cnv.fill('yellow')
+  cnv.circle(0, -50, 50)
   cnv.pop()
   image(cnv, 0, 0)
 }
