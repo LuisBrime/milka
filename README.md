@@ -18,7 +18,7 @@ sketches. </sup></sub>
 some features will be added as project progresses, like building projects for
 NFT marketplaces; but for now:
 
-### ⭐️ p5js
+#### ⭐️ p5js
 
 work with p5js sketches out of the box with no configuration needed, just create
 your sketch code with `setup()` and `draw()` functions; making sure to export
@@ -37,7 +37,7 @@ function draw() {
 export default { setup, draw }
 ```
 
-### ⭐️ hot reload development 💻
+#### ⭐️ hot reload development 💻
 
 > [!IMPORTANT]
 > there's no need to setup an `index.html` or any configuration to start working
@@ -82,15 +82,14 @@ having a directory inside <code>projects/</code> allows you to organize your ske
   you wish to change this value be sure to add a <code>milka.config.ts</code> file
   overriding with your preferences:<br>
   <pre lang="ts">
-  import { ProjectConfig } from '@/compiler/config/index.ts'
+import { ProjectConfig } from '@/compiler/config/index.ts'
 
-export const config: ProjectConfig = {
-  entry: 'otherEntryPoint',
-}
-</pre><br>
-be sure to export any needed functions or classes needed for your entrypoint
-  to render the sketch so <code>milka</code> can properly link them:<br>
-  <pre lang="js">
+export const config: ProjectConfig = { entry: 'otherEntryPoint', }
+</pre><br> be sure to export any needed functions or classes needed for your
+entrypoint to render the sketch so <code>milka</code> can properly link
+them:<br>
+
+<pre lang="js">
 // inside yourOtherFile.js
 
 // ...
@@ -103,7 +102,6 @@ export default { myFunction, MyClass }
 </td>
 </tr>
 </table>
-
 
 <br>
 <h2>⚙️ installing & running</h2>
@@ -129,7 +127,9 @@ default port.
 
 <strong>example:</strong>
 
-- `localhost:8000/milka` 🔗 this will try to render the sketch matching `milka` (directory or standalone file); listen for changes on the file and reload if needed.
+- `localhost:8000/milka` 🔗 this will try to render the sketch matching `milka`
+  (directory or standalone file); listen for changes on the file and reload if
+  needed.
 
 :shipit:
 
