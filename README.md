@@ -18,7 +18,7 @@ sketches. </sup></sub>
 some features will be added as project progresses, like building projects for
 NFT marketplaces; but for now:
 
-### p5js
+### ⭐️ p5js
 
 work with p5js sketches out of the box with no configuration needed, just create
 your sketch code with `setup()` and `draw()` functions; making sure to export
@@ -37,7 +37,7 @@ function draw() {
 export default { setup, draw }
 ```
 
-### hot reload development 💻
+### ⭐️ hot reload development 💻
 
 > [!IMPORTANT]
 > there's no need to setup an `index.html` or any configuration to start working
@@ -49,40 +49,48 @@ automatically be detected and the page will be reloaded.
 
 there's currently 3 formats accepted to work with sketches:
 
-<h4>standalone file</h4>
-
-- creating any `.js` file under `projects/` allows the sketch to be rendered
-  when navigating to `localhost:PORT/yourFile`.
-
-<h4>standalone file with configuration</h4>
-
-- you can save your project under a directory inside `projects/` and add your
-  sketch `.js` file there, this allows you to add a `milka.config.ts` file if
+<table>
+<tr>
+<td width="50%">
+<strong>standalone file</strong>
+</td>
+<td width="50%">
+creating any <code>.js</code> file under <code>projects/</code> allows the sketch to be rendered
+  when navigating to <code>localhost:PORT/yourFile</code>.
+</td>
+</tr>
+<tr>
+<td width="50%">
+<strong>standalone with config</strong>
+</td>
+<td width="50%">
+you can save your project under a directory inside <code>projects/</code> and add your
+  sketch <code>.js</code> file there, this allows you to add a <code>milka.config.ts</code> file if
   you want to configure the project with specific values (more configuration
   will be added as features are created).
-
-<h4>multiple files</h4>
-
-- having a directory inside `projects/` allows you to organize your sketch into
-  different files that `milka` will still handle and show when rendering your
-  sketch.
-
-- the default entry file used by `milka` for your sketch will be `sketch.js`, if
-  you wish to change this value be sure to add a `milka.config.ts` file
-  overriding with your preferences:
-
-```typescript
-import { ProjectConfig } from '@/compiler/config/index.ts'
+</td>
+</tr>
+<tr>
+<td width="50%">
+<strong>multiple files</strong>
+</td>
+<td width="50%">
+having a directory inside <code>projects/</code> allows you to organize your sketch into
+  different files that <code>milka</code> will still handle and show when rendering your
+  sketch.<br><br>
+  the default entry file used by <code>milka</code> for your sketch will be <code>sketch.js</code>, if
+  you wish to change this value be sure to add a <code>milka.config.ts</code> file
+  overriding with your preferences:<br>
+  <pre lang="ts">
+  import { ProjectConfig } from '@/compiler/config/index.ts'
 
 export const config: ProjectConfig = {
   entry: 'otherEntryPoint',
 }
-```
-
-- be sure to export any needed functions or classes needed for your entrypoint
-  to render the sketch so `milka` can properly link them:
-
-```javascript
+</pre><br>
+be sure to export any needed functions or classes needed for your entrypoint
+  to render the sketch so <code>milka</code> can properly link them:<br>
+  <pre lang="js">
 // inside yourOtherFile.js
 
 // ...
@@ -91,7 +99,11 @@ export const config: ProjectConfig = {
 
 // make sure to export them
 export default { myFunction, MyClass }
-```
+  </pre>
+</td>
+</tr>
+</table>
+
 
 <br>
 <h2>⚙️ installing & running</h2>
@@ -117,12 +129,7 @@ default port.
 
 <strong>example:</strong>
 
-- `localhost:8000/milka` 🔗 this will try to render the sketch found on
-  `projects/milka.js`; listen for changes on the file and reload if needed.
-
-> [!NOTE]
-> note: for `p5js`, make sure to export the sketch functions (like `setup()` and
-> `draw()`) for `milka` to correctly render them.
+- `localhost:8000/milka` 🔗 this will try to render the sketch matching `milka` (directory or standalone file); listen for changes on the file and reload if needed.
 
 :shipit:
 
