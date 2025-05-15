@@ -53,6 +53,7 @@ there's currently 3 formats accepted to work with sketches:
 <tr>
 <td width="50%">
 <strong>standalone file</strong><br>
+
 [example](projects/milka.js)
 </td>
 <td width="50%">
@@ -63,6 +64,7 @@ creating any <code>.js</code> file under <code>projects/</code> allows the sketc
 <tr>
 <td width="50%">
 <strong>standalone with config</strong><br>
+
 [example](projects/milka_w_config/)
 </td>
 <td width="50%">
@@ -75,6 +77,7 @@ you can save your project under a directory inside <code>projects/</code> and ad
 <tr>
 <td width="50%">
 <strong>multiple files</strong><br>
+
 [example](projects/milka_mult/)
 </td>
 <td width="50%">
