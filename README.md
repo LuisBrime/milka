@@ -15,7 +15,7 @@ sketches. </sup></sub>
 <br>
 <h2>☕️ features</h2>
 
-some features will be added as project progresses, like building projects for
+some features will be added as project progresses, like building sketches for
 NFT marketplaces; but for now:
 
 #### ⭐️ p5js
@@ -54,10 +54,11 @@ there's currently 3 formats accepted to work with sketches:
 <td width="50%">
 <strong>standalone file</strong><br>
 
-[example](projects/milka.js)
+[example](sketches/[examples]/milka.js)
+
 </td>
 <td width="50%">
-creating any <code>.js</code> file under <code>projects/</code> allows the sketch to be rendered
+creating any <code>.js</code> file under <code>sketches/</code> allows the sketch to be rendered
   when navigating to <code>localhost:PORT/yourFile</code>.
 </td>
 </tr>
@@ -65,10 +66,11 @@ creating any <code>.js</code> file under <code>projects/</code> allows the sketc
 <td width="50%">
 <strong>standalone with config</strong><br>
 
-[example](projects/milka_w_config/)
+[example](sketches/[examples]/milka_w_config/)
+
 </td>
 <td width="50%">
-you can save your project under a directory inside <code>projects/</code> and add your
+you can save your project under a directory inside <code>sketches/</code> and add your
   sketch <code>.js</code> file there, this allows you to add a <code>milka.config.ts</code> file if
   you want to configure the project with specific values (more configuration
   will be added as features are created).
@@ -78,10 +80,11 @@ you can save your project under a directory inside <code>projects/</code> and ad
 <td width="50%">
 <strong>multiple files</strong><br>
 
-[example](projects/milka_mult/)
+[example](sketches/[examples]/milka_mult/)
+
 </td>
 <td width="50%">
-having a directory inside <code>projects/</code> allows you to organize your sketch into
+having a directory inside <code>sketches/</code> allows you to organize your sketch into
   different files that <code>milka</code> will still handle and show when rendering your
   sketch.<br><br>
   the default entry file used by <code>milka</code> for your sketch will be <code>sketch.js</code>, if
@@ -110,9 +113,25 @@ export default { myFunction, MyClass }
 </table>
 
 <br>
+
+> [!TIP]
+> it's possible to organize sketches into directories allowing flexibility for
+> developing and organization.
+>
+> naming a directory between brackes (`[dirName]`) will allow `milka` to
+> "ignore" the directory; meaning it won't be part of the request path needed to
+> render the sketch. for example: A sketch saved on
+> `sketches/[my2025sketches]/happy.js` can be rendered through
+> `localhost:PORT/happy`
+>
+> you can find some sketch examples [here](sketches/[examples]).
+
+<br>
+<br>
 <h2>⚙️ installing & running</h2>
 
-only [deno](https://deno.com/) is required to run the project:
+after cloning or downloading the repo; only [deno](https://deno.com/) is
+required to run the project:
 
 1. install dependencies:
 

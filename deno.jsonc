@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "serve": "deno run -N -R -W -E --allow-ffi --env-file main.ts"
+    "serve": "deno run -N -R -W -E --allow-ffi --env-file milka/main.ts"
   },
   "imports": {
     "@oak/oak": "jsr:@oak/oak@^17.1.4",
@@ -9,11 +9,14 @@
     "chalk": "npm:chalk@^5.4.1",
     "p5": "npm:p5@^2.0.1",
     // Local import mapping
-    "@/common": "./common.ts",
-    "@/compiler/": "./compiler/",
-    "@/log": "./log.ts",
-    "@/routes": "./routes.ts",
-    "@/ws": "./ws.ts"
+    "@/compiler": "./milka/services/compiler/index.ts",
+    "@/compiler/config": "./milka/services/compiler/config/index.ts",
+    "@/log": "./milka/log.ts",
+    "@/router": "./milka/router/index.ts",
+    "@/router/middleware": "./milka/router/middleware.ts",
+    "@/router/requests": "./milka/router/requests.ts",
+    "@/sketch_fs": "./milka/services/file_system/index.ts",
+    "@/ws": "./milka/router/ws.ts"
   },
   "fmt": {
     "singleQuote": true,
