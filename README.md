@@ -1,6 +1,6 @@
 <h1 align="center">milka</h1>
 
-$\color{Lavender}{creative\ coding\ companion.}$
+<p color="#e6e6fA">creative coding companion</p>
 
 <br>
 <h2>🐶 about</h2>
@@ -152,7 +152,7 @@ default port.
 
 <strong>example:</strong>
 
-- `localhost:8000/milka` 🔗 this will try to render the sketch matching `milka`
+- 🔗 `localhost:8000/milka`: this will try to render the sketch matching `milka`
   (directory or standalone file); listen for changes on the file and reload if
   needed.
 
