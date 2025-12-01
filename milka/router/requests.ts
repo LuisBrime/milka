@@ -1,5 +1,6 @@
-import { type ResolvedPath, type SketchFs } from '@/sketch_fs';
 import { assert } from '@std/assert/assert';
+
+import { type ResolvedPath, type SketchFs } from '@/services/fs';
 
 export class SketchRequest {
   readonly requestPath: string;

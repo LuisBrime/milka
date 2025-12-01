@@ -3,6 +3,7 @@ import {
   type ApplicationErrorEvent,
   type State,
 } from 'jsr:@oak/oak/application';
+
 import { logError } from '@/log';
 
 interface ErrorHandler {

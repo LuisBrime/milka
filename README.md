@@ -91,7 +91,7 @@ having a directory inside <code>sketches/</code> allows you to organize your ske
   you wish to change this value be sure to add a <code>milka.config.ts</code> file
   overriding with your preferences:<br>
   <pre lang="ts">
-import { ProjectConfig } from '@/compiler/config/index.ts'
+import { ProjectConfig } from '@/services/compiler/config'
 
 export const config: ProjectConfig = { entry: 'otherEntryPoint', }
 </pre><br> be sure to export any needed functions or classes needed for your

@@ -8,8 +8,11 @@ import {
   type Watching,
 } from 'npm:@rspack/core';
 
-import { setSketchConfig, type SketchConfiguration } from '@/compiler/config';
-import { type SketchFs } from '@/sketch_fs';
+import {
+  setSketchConfig,
+  type SketchConfiguration,
+} from '@/services/compiler/config';
+import { type SketchFs } from '@/services/fs';
 import { Service } from '@/services/service-registry';
 
 import { P5InjectPlugin, WSScriptPlugin } from './plugins.ts';

@@ -1,11 +1,11 @@
 import { Application } from 'jsr:@oak/oak';
 
-import { MilkaCompiler } from '@/compiler';
 import { chalk, milkaLog } from '@/log';
 import { sketchRouter } from '@/router';
 import { errorHandler } from '@/router/middleware';
+import { MilkaCompiler } from '@/services/compiler';
+import { SketchFs } from '@/services/fs';
 import { serviceRegistry } from '@/services/service-registry';
-import { SketchFs } from '@/sketch_fs';
 
 const SERVER_PORT = parseInt(Deno.env.get('PORT') ?? '8000');
 

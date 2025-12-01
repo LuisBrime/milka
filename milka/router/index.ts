@@ -1,12 +1,12 @@
 import { Router, Status } from 'jsr:@oak/oak';
 
-import { MilkaCompiler } from '@/compiler';
+import { chalk, milkaLog } from '@/log';
 import { errorHandler } from '@/router/middleware';
 import { SketchRequest } from '@/router/requests';
-import { chalk, milkaLog } from '@/log';
+import { addWSClient, reloadWSClient } from '@/router/ws';
+import { MilkaCompiler } from '@/services/compiler';
+import { SketchFs } from '@/services/fs';
 import { serviceRegistry } from '@/services/service-registry';
-import { SketchFs } from '@/sketch_fs';
-import { addWSClient, reloadWSClient } from '@/ws';
 
 export const sketchRouter = new Router();
 

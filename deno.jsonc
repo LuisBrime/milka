@@ -9,15 +9,15 @@
     "chalk": "npm:chalk@^5.6.2",
     "p5": "npm:p5@^2.1.1",
     // Local import mapping
-    "@/compiler": "./milka/services/compiler/index.ts",
-    "@/compiler/config": "./milka/services/compiler/config/index.ts",
     "@/log": "./milka/log.ts",
     "@/router": "./milka/router/index.ts",
     "@/router/middleware": "./milka/router/middleware.ts",
     "@/router/requests": "./milka/router/requests.ts",
+    "@/router/ws": "./milka/router/ws.ts",
+    "@/services/compiler": "./milka/services/compiler/index.ts",
+    "@/services/compiler/config": "./milka/services/compiler/config/index.ts",
     "@/services/service-registry": "./milka/services/service-registry.ts",
-    "@/sketch_fs": "./milka/services/file_system/index.ts",
-    "@/ws": "./milka/router/ws.ts"
+    "@/services/fs": "./milka/services/file_system/index.ts"
   },
   "fmt": {
     "singleQuote": true

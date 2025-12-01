@@ -2,7 +2,7 @@ import * as path from 'jsr:@std/path';
 import { walk } from 'jsr:@std/fs/walk';
 import { type EntryDescription, type EntryObject } from 'npm:@rspack/core';
 
-import { type ResolvedPath } from '@/sketch_fs';
+import { type ResolvedPath } from '@/services/fs';
 
 // export type SketchDrawingLib = 'p5'
 

@@ -1,6 +1,6 @@
-import { SketchConfig, SketchConfiguration } from './sketch.ts';
+import { type ResolvedPath } from '@/services/fs';
 
-import { type ResolvedPath } from '@/sketch_fs';
+import { SketchConfig, SketchConfiguration } from './sketch.ts';
 
 /**
  * @param sketchPath file path for the sketch to be configured.
