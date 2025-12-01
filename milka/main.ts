@@ -1,49 +1,76 @@
-import { Application } from 'jsr:@oak/oak'
+import { Application } from 'jsr:@oak/oak';
 
-import { getMilkaCompiler } from '@/compiler'
-import { chalk, milkaLog } from '@/log'
-import { sketchRouter } from '@/router'
-import { errorHandler } from '@/router/middleware'
+import { MilkaCompiler } from '@/compiler';
+import { chalk, milkaLog } from '@/log';
+import { sketchRouter } from '@/router';
+import { errorHandler } from '@/router/middleware';
+import { serviceRegistry } from '@/services/service-registry';
+import { SketchFs } from '@/sketch_fs';
 
-const SERVER_PORT = parseInt(Deno.env.get('PORT') ?? '8000')
+const SERVER_PORT = parseInt(Deno.env.get('PORT') ?? '8000');
 
-console.log('\n')
+function setupApplication(app: Application) {
+  app.use(sketchRouter.routes());
+  app.use(sketchRouter.allowedMethods());
+
+  app.addEventListener('listen', ({ port }) => {
+    console.group();
+    milkaLog(`will run on port: ${chalk.italic.bold(`${port}`)}`);
+    milkaLog('listening...\n');
+    console.groupEnd();
+  });
+  app.addEventListener('error', errorHandler.listener);
+}
+
+function setupClosingSignals(controller: AbortController) {
+  const signalHandler = async (): Promise<void> => {
+    Deno.removeSignalListener('SIGINT', signalHandler);
+
+    console.log('\n');
+    milkaLog(chalk.underline('🤍 closing server, bye bye! 👋'));
+    console.log('\n');
+
+    const milkaCompiler = serviceRegistry.get<MilkaCompiler>('compiler');
+    await milkaCompiler.close();
+
+    controller.abort();
+    Deno.exit(0);
+  };
+
+  Deno.addSignalListener('SIGINT', signalHandler);
+}
+
+/**
+ * Initializes Services used accross `milka`, solving dependencies between them.
+ */
+async function setupServices() {
+  const fs = new SketchFs();
+  await fs.buildFsTree();
+
+  const compiler = new MilkaCompiler(fs);
+
+  serviceRegistry.register('fs', fs);
+  serviceRegistry.register('compiler', compiler);
+}
+
+console.log('\n');
 console.log(
   chalk.underline(
     `🐶 welcome to ${chalk.hex('#ec4899').bold('milka')},`,
     'your creative coding companion!\n',
   ),
-)
+);
 
-const app = new Application()
-app.use(sketchRouter.routes())
-app.use(sketchRouter.allowedMethods())
+const app = new Application();
+setupApplication(app);
 
-app.addEventListener('listen', ({ port }) => {
-  console.group()
-  milkaLog(`will run on port: ${chalk.italic.bold(`${port}`)}`)
-  milkaLog('listening...\n')
-  console.groupEnd()
-})
-app.addEventListener('error', errorHandler.listener)
+const closingController = new AbortController();
+setupClosingSignals(closingController);
 
-const closingController = new AbortController()
-const signalHandler = async (): Promise<void> => {
-  Deno.removeSignalListener('SIGINT', signalHandler)
-  console.log('\n')
-  milkaLog(chalk.underline('🤍 closing server, bye bye! 👋'))
-  console.log('\n')
-
-  const milkaCompiler = await getMilkaCompiler()
-  await milkaCompiler.closeAll()
-  closingController.abort()
-  Deno.exit(0)
-}
-
-Deno.addSignalListener('SIGINT', signalHandler)
+await setupServices();
 
 await app.listen({
   port: SERVER_PORT,
   secure: false,
   signal: closingController.signal,
-})
+});

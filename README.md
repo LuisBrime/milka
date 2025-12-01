@@ -34,7 +34,7 @@ function draw() {
 }
 
 // export them for milka to correctly link them
-export default { setup, draw }
+export default { setup, draw };
 ```
 
 #### ⭐️ hot reload development 💻

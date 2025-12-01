@@ -15,11 +15,11 @@
     "@/router": "./milka/router/index.ts",
     "@/router/middleware": "./milka/router/middleware.ts",
     "@/router/requests": "./milka/router/requests.ts",
+    "@/services/service-registry": "./milka/services/service-registry.ts",
     "@/sketch_fs": "./milka/services/file_system/index.ts",
     "@/ws": "./milka/router/ws.ts"
   },
   "fmt": {
-    "singleQuote": true,
-    "semiColons": false
+    "singleQuote": true
   }
 }

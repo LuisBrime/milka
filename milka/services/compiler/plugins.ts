@@ -1,16 +1,16 @@
-import { HtmlRspackPlugin, type RspackPluginInstance } from 'npm:@rspack/core'
+import { HtmlRspackPlugin, type RspackPluginInstance } from 'npm:@rspack/core';
 
-const P5PluginName = 'P5InjectPlugin'
-const WSPluginName = 'WSScriptPlugin'
+const P5PluginName = 'P5InjectPlugin';
+const WSPluginName = 'WSScriptPlugin';
 
 const p5GlobalInstanceScript = (
   lib: string,
   entry: string,
   scripts: string | string[],
 ) => {
-  let sketchCheckingCode: string
+  let sketchCheckingCode: string;
   if (Array.isArray(scripts)) {
-    const scriptsStr = scripts.map((s) => `"${s}"`).join(',')
+    const scriptsStr = scripts.map((s) => `"${s}"`).join(',');
 
     const scriptPromiseFn = `
       function onLoadPromise(script) {
@@ -23,7 +23,7 @@ const p5GlobalInstanceScript = (
           }
         })
       }
-    `
+    `;
 
     sketchCheckingCode = `
       ${scriptPromiseFn}
@@ -52,7 +52,7 @@ const p5GlobalInstanceScript = (
           Object.assign(window, window[n])
         }
       })
-    `
+    `;
   } else {
     sketchCheckingCode = `
       let sketchScript
@@ -69,7 +69,7 @@ const p5GlobalInstanceScript = (
       sketchScript.onload = function(e) {
           Object.assign(window, window.${lib})
       }
-    `
+    `;
   }
 
   return `
@@ -78,8 +78,8 @@ const p5GlobalInstanceScript = (
         const bodyE = document.getElementsByTagName('body')[0]
         ${sketchCheckingCode}
     </script>
-`
-}
+`;
+};
 
 const wsReloadScript = `
   <!-- script injected by milka -->
@@ -94,7 +94,7 @@ const wsReloadScript = `
       }
     }
   </script>
-`
+`;
 
 export const P5InjectPlugin = (
   lib: string,
@@ -103,7 +103,7 @@ export const P5InjectPlugin = (
 ): RspackPluginInstance => ({
   apply(compiler) {
     compiler.hooks.compilation.tap(P5PluginName, (compilation) => {
-      const hooks = HtmlRspackPlugin.getCompilationHooks(compilation)
+      const hooks = HtmlRspackPlugin.getCompilationHooks(compilation);
       hooks.beforeAssetTagGeneration
         .tap(
           P5PluginName,
@@ -111,10 +111,10 @@ export const P5InjectPlugin = (
             data.assets.js = [
               'https://cdn.jsdelivr.net/npm/p5@1.11.5/lib/p5.min.js',
               ...data.assets.js,
-            ]
-            return data
+            ];
+            return data;
           },
-        )
+        );
 
       hooks.alterAssetTags
         .tap(
@@ -124,29 +124,31 @@ export const P5InjectPlugin = (
               const deferCheck = (t: typeof tag) =>
                 Array.isArray(sketches)
                   ? sketches.some((e) => t.asset?.includes(e))
-                  : t.asset?.includes(sketchEntry)
+                  : t.asset?.includes(sketchEntry);
               if (
                 tag.tagName === 'script' && deferCheck(tag)
               ) {
-                tag.attributes.defer = true
+                tag.attributes.defer = true;
               }
-              return tag
-            })
-            return data
+              return tag;
+            });
+            return data;
           },
-        )
+        );
 
       hooks.alterAssetTagGroups
         .tap(
           P5PluginName,
           (data) => {
-            data.headTags = data.bodyTags.filter((t) => t.asset?.includes('p5'))
+            data.headTags = data.bodyTags.filter((t) =>
+              t.asset?.includes('p5')
+            );
             data.bodyTags = data.bodyTags.filter((t) =>
               !t.asset?.includes('p5')
-            )
-            return data
+            );
+            return data;
           },
-        )
+        );
 
       hooks.beforeEmit.tap(
         P5PluginName,
@@ -154,13 +156,13 @@ export const P5InjectPlugin = (
           data.html = data.html.replace(
             '</body>',
             `${p5GlobalInstanceScript(lib, sketchEntry, sketches)}</body>`,
-          )
-          return data
+          );
+          return data;
         },
-      )
-    })
+      );
+    });
   },
-})
+});
 
 export const WSScriptPlugin: RspackPluginInstance = {
   apply(compiler) {
@@ -168,10 +170,10 @@ export const WSScriptPlugin: RspackPluginInstance = {
       HtmlRspackPlugin.getCompilationHooks(compilation).beforeEmit.tap(
         WSPluginName,
         (data) => {
-          data.html = data.html.replace('</body>', `${wsReloadScript}</body>`)
-          return data
+          data.html = data.html.replace('</body>', `${wsReloadScript}</body>`);
+          return data;
         },
-      )
-    })
+      );
+    });
   },
-}
+};
