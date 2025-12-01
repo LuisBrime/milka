@@ -1,6 +1,6 @@
-import { SketchConfig, SketchConfiguration } from './sketch.ts'
+import { SketchConfig, SketchConfiguration } from './sketch.ts';
 
-import { type ResolvedPath } from '@/sketch_fs'
+import { type ResolvedPath } from '@/sketch_fs';
 
 /**
  * @param sketchPath file path for the sketch to be configured.
@@ -13,8 +13,8 @@ export const setSketchConfig = async (
   const config = await SketchConfiguration.fromResolvedSketch(
     resolved,
     extendFrom,
-  )
-  return config
-}
+  );
+  return config;
+};
 
-export * from './sketch.ts'
+export * from './sketch.ts';
