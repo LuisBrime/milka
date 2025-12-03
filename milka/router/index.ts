@@ -3,7 +3,7 @@ import { Router, Status } from 'jsr:@oak/oak';
 import { chalk, milkaLog } from '@/log';
 import { errorHandler } from '@/router/middleware';
 import { SketchRequest } from '@/router/requests';
-import { addWSClient, reloadWSClient } from '@/router/ws';
+import { addWSClient, reloadWSClient } from '@/router/web-socket';
 import { MilkaCompiler } from '@/services/compiler';
 import { SketchFs } from '@/services/fs';
 import { serviceRegistry } from '@/services/service-registry';

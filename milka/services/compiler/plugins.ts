@@ -3,11 +3,19 @@ import { HtmlRspackPlugin, type RspackPluginInstance } from 'npm:@rspack/core';
 const P5PluginName = 'P5InjectPlugin';
 const WSPluginName = 'WSScriptPlugin';
 
+/**
+ * Defines script that will properly load all files related to a sketch.
+ *
+ * @param lib - Name of the sketch; it will be used to define the output window Object with setup/draw functions.
+ * @param entry - File name of the entrypoint of a sketch.
+ * @param scripts - All script names (or single name) of the files that will be loaded and used in the sketch.
+ * @returns Script string with all the logic to properly load sketch files and link their exports for global-like use.
+ */
 const p5GlobalInstanceScript = (
   lib: string,
   entry: string,
   scripts: string | string[],
-) => {
+): string => {
   let sketchCheckingCode: string;
   if (Array.isArray(scripts)) {
     const scriptsStr = scripts.map((s) => `"${s}"`).join(',');
@@ -109,7 +117,7 @@ export const P5InjectPlugin = (
           P5PluginName,
           (data) => {
             data.assets.js = [
-              'https://cdn.jsdelivr.net/npm/p5@1.11.5/lib/p5.min.js',
+              'https://cdn.jsdelivr.net/npm/p5@2.1.1/lib/p5.min.js',
               ...data.assets.js,
             ];
             return data;

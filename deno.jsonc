@@ -13,11 +13,11 @@
     "@/router": "./milka/router/index.ts",
     "@/router/middleware": "./milka/router/middleware.ts",
     "@/router/requests": "./milka/router/requests.ts",
-    "@/router/ws": "./milka/router/ws.ts",
+    "@/router/web-socket": "./milka/router/web-socket.ts",
     "@/services/compiler": "./milka/services/compiler/index.ts",
     "@/services/compiler/config": "./milka/services/compiler/config/index.ts",
     "@/services/service-registry": "./milka/services/service-registry.ts",
-    "@/services/fs": "./milka/services/file_system/index.ts"
+    "@/services/fs": "./milka/services/fs/index.ts"
   },
   "fmt": {
     "singleQuote": true
