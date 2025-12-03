@@ -1,4 +1,4 @@
-import { Context } from 'jsr:@oak/oak';
+import { Context } from '@oak/oak';
 
 const wsClients = new Map<string, WebSocket>();
 

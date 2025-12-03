@@ -1,12 +1,7 @@
-import { Context } from 'jsr:@oak/oak';
-import { Status } from 'jsr:@oak/commons/status';
-import * as path from 'jsr:@std/path';
-import {
-  type Compiler,
-  type Entry,
-  rspack,
-  type Watching,
-} from 'npm:@rspack/core';
+import { Context } from '@oak/oak';
+import { Status } from '@oak/commons/status';
+import { type Compiler, type Entry, rspack, type Watching } from '@rspack/core';
+import * as path from '@std/path';
 
 import {
   setSketchConfig,

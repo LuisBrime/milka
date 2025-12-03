@@ -1,6 +1,6 @@
-import * as path from 'jsr:@std/path';
-import { walk } from 'jsr:@std/fs/walk';
-import { type EntryDescription, type EntryObject } from 'npm:@rspack/core';
+import { type EntryDescription, type EntryObject } from '@rspack/core';
+import * as path from '@std/path';
+import { walk } from '@std/fs/walk';
 
 import { type ResolvedPath } from '@/services/fs';
 

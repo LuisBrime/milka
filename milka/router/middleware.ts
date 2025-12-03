@@ -1,8 +1,5 @@
-import { isHttpError, type Middleware, Status } from 'jsr:@oak/oak';
-import {
-  type ApplicationErrorEvent,
-  type State,
-} from 'jsr:@oak/oak/application';
+import { isHttpError, type Middleware, Status } from '@oak/oak';
+import { type ApplicationErrorEvent, type State } from '@oak/oak/application';
 
 import { logError } from '@/log';
 

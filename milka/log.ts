@@ -1,4 +1,4 @@
-import { Chalk } from 'npm:chalk';
+import { Chalk } from 'chalk';
 
 export const chalk = new Chalk({ level: 3 });
 const log = console.log;

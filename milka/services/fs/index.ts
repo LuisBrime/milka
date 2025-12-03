@@ -1,4 +1,4 @@
-import { join, parse, resolve } from 'jsr:@std/path';
+import { join, parse, resolve } from '@std/path';
 
 import { Service } from '@/services/service-registry';
 

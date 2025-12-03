@@ -1,4 +1,4 @@
-import { Application } from 'jsr:@oak/oak';
+import { Application } from '@oak/oak';
 
 import { chalk, milkaLog } from '@/log';
 import { sketchRouter } from '@/router';

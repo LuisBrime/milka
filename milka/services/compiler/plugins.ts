@@ -1,4 +1,4 @@
-import { HtmlRspackPlugin, type RspackPluginInstance } from 'npm:@rspack/core';
+import { HtmlRspackPlugin, type RspackPluginInstance } from '@rspack/core';
 
 const P5PluginName = 'P5InjectPlugin';
 const WSPluginName = 'WSScriptPlugin';

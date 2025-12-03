@@ -1,4 +1,4 @@
-import { Router, Status } from 'jsr:@oak/oak';
+import { Router, Status } from '@oak/oak';
 
 import { chalk, milkaLog } from '@/log';
 import { errorHandler } from '@/router/middleware';
