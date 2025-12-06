@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "serve": "deno run -N -R -W -E --allow-ffi --env-file milka/main.ts"
+    "serve": "deno run -N -R -W -E --allow-ffi --env-file --unstable-kv milka/main.ts"
   },
   "imports": {
     "@oak/commons": "jsr:@oak/commons@^1.0.1",
@@ -9,18 +9,21 @@
     "@std/assert": "jsr:@std/assert@^1.0.16",
     "@std/fs": "jsr:@std/fs@^1.0.20",
     "@std/path": "jsr:@std/path@^1.1.3",
+    "@std/testing": "jsr:@std/testing@^1.0.16",
     "chalk": "npm:chalk@^5.6.2",
     "p5": "npm:p5@^2.1.1",
     // Local import mapping
     "@/log": "./milka/log.ts",
+    "@/models/fs-models": "./milka/models/fs-models.ts",
     "@/router": "./milka/router/index.ts",
     "@/router/middleware": "./milka/router/middleware.ts",
     "@/router/requests": "./milka/router/requests.ts",
     "@/router/web-socket": "./milka/router/web-socket.ts",
     "@/services/compiler": "./milka/services/compiler/index.ts",
     "@/services/compiler/config": "./milka/services/compiler/config/index.ts",
-    "@/services/service-registry": "./milka/services/service-registry.ts",
-    "@/services/fs": "./milka/services/fs/index.ts"
+    "@/services/fs": "./milka/services/fs/index.ts",
+    "@/services/kv/milka-kv": "./milka/services/kv/milka-kv.ts",
+    "@/services/service-registry": "./milka/services/service-registry.ts"
   },
   "fmt": {
     "singleQuote": true

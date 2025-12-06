@@ -5,6 +5,7 @@ import { sketchRouter } from '@/router';
 import { errorHandler } from '@/router/middleware';
 import { MilkaCompiler } from '@/services/compiler';
 import { SketchFs } from '@/services/fs';
+import MilkaKV from '@/services/kv/milka-kv';
 import { serviceRegistry } from '@/services/service-registry';
 
 const SERVER_PORT = parseInt(Deno.env.get('PORT') ?? '8000');
@@ -48,9 +49,11 @@ async function setupServices() {
   await fs.buildFsTree();
 
   const compiler = new MilkaCompiler(fs);
+  const milkaKv = new MilkaKV();
 
-  serviceRegistry.register('fs', fs);
   serviceRegistry.register('compiler', compiler);
+  serviceRegistry.register('fs', fs);
+  serviceRegistry.register('kv', milkaKv);
 }
 
 console.log('\n');

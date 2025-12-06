@@ -1,4 +1,4 @@
-export type ServiceKey = 'compiler' | 'fs';
+export type ServiceKey = 'compiler' | 'fs' | 'kv';
 
 export abstract class Service {
   abstract close(): Promise<void>;
